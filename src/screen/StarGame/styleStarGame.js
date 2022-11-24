@@ -21,7 +21,8 @@ export const styles = StyleSheet.create({
     },
     inputTitle: {
         fontSize: 15,
-        marginVertical: 5
+        marginVertical: 5,
+        fontFamily: 'Lato-Bold'
     },
     input: {
         textAlign: "center",
@@ -32,7 +33,8 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '70%',
         justifyContent: 'space-around',
-        marginVertical: 20
+        marginVertical: 20,
+        fontFamily: 'Lato-Bold'
     },
     confirmedContainer: {
         width: '80%',

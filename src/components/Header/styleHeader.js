@@ -12,6 +12,6 @@ export const styles = StyleSheet.create({
     title: {
         color: 'white',
         fontSize: 25,
-        fontWeight: 'bold',
+        fontFamily: 'Lato-Regular'
     }
 })
