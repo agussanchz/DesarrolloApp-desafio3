@@ -51,9 +51,21 @@ export default function App() {
     )
   }
 
+  const getTitle = () => {
+    let title;
+    if(userNumber && guessRound <= 0) {
+      title = 'Adivina un numero';
+    } else if (guessRound > 0) {
+      title = 'Juego finalizado';
+    } else {
+      title = 'Bienvenido';
+    }
+    return title;
+  }
+
   return (
     <View style={styles.container}>
-      <Header title={userNumber ? 'AsGame' : 'Bienvenidos a AsGame'} />   
+      <Header title={getTitle()} />   
       {content}
     </View>
   );

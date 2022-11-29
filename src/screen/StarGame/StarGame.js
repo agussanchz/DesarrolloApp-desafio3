@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button, TouchableWithoutFeedback, Keyboard, Alert, ScrollView } from 'react-native'
+import { View, Text, Button, TouchableWithoutFeedback, Keyboard, Alert, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
 //Importacion de mis componentes
 import Card from '../../components/Card/Card'
 import Input from '../../components/Input/Input'
@@ -49,42 +49,44 @@ export default function StarGame({ onStartGame }) {
 
 
     return (
-        <TouchableWithoutFeedback onPress={() => {
-            Keyboard.dismiss()
-        }}>
-            <ScrollView style={styles.containerScroll}>
-                <View style={styles.container}>
-                    <Text style={styles.title}>¡Vamos a jugar!</Text>
-                    <Card style={styles.inputContainer}>
-                        <Text style={styles.inputTitle}>Elija un numero</Text>
-                        <Input
-                            style={styles.input}
-                            placeholder='0'
-                            maxLength={2}
-                            keyboardType='number-pad'
-                            blurOnSubmit
-                            autoCapitalization='none'
-                            autoCorrect={false}
-                            onChangeText={onHandleChange}
-                            value={number}
-                        />
-                        <View style={styles.buttonContainer}>
-                            <Button
-                                title='Resetear'
-                                onPress={onHandleReset}
-                                color={Colors.primary}
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'height' : 'padding'} style={styles.containerScroll}>
+            <TouchableWithoutFeedback onPress={() => {
+                Keyboard.dismiss()
+            }}>
+                <ScrollView style={styles.containerScroll}>
+                    <View style={styles.container}>
+                        <Text style={styles.title}>¡Vamos a jugar!</Text>
+                        <Card style={styles.inputContainer}>
+                            <Text style={styles.inputTitle}>Elija un numero</Text>
+                            <Input
+                                style={styles.input}
+                                placeholder='0'
+                                maxLength={2}
+                                keyboardType='number-pad'
+                                blurOnSubmit
+                                autoCapitalization='none'
+                                autoCorrect={false}
+                                onChangeText={onHandleChange}
+                                value={number}
                             />
-                            <Button
-                                style={styles.button}
-                                title='Confirmar'
-                                onPress={onHandleConfirm}
-                                color={Colors.primary}
-                            />
-                        </View>
-                    </Card>
-                    {confirmedOutput()}
-                </View>
-            </ScrollView>
-        </TouchableWithoutFeedback>
+                            <View style={styles.buttonContainer}>
+                                <Button
+                                    title='Resetear'
+                                    onPress={onHandleReset}
+                                    color={Colors.primary}
+                                />
+                                <Button
+                                    style={styles.button}
+                                    title='Confirmar'
+                                    onPress={onHandleConfirm}
+                                    color={Colors.primary}
+                                />
+                            </View>
+                        </Card>
+                        {confirmedOutput()}
+                    </View>
+                </ScrollView>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     )
 }
