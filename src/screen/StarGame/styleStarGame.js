@@ -2,6 +2,9 @@ import { StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
 
 export const styles = StyleSheet.create({
+    containerScroll: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         alignItems: 'center',

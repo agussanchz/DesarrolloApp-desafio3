@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
+import { View, Text, Button, TouchableWithoutFeedback, Keyboard, Alert, ScrollView } from 'react-native'
 //Importacion de mis componentes
 import Card from '../../components/Card/Card'
 import Input from '../../components/Input/Input'
@@ -25,8 +25,8 @@ export default function StarGame({ onStartGame }) {
 
     const onHandleConfirm = () => {
         const chosenNumber = parseInt(number, 10);
-        if(isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99){
-            Alert.alert('Numero Invalido' , 'El número tiene que estar entre 1 y 99', [{text: 'Okay', style: 'destructive', onPress: onHandleReset}]);
+        if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+            Alert.alert('Numero Invalido', 'El número tiene que estar entre 1 y 99', [{ text: 'Okay', style: 'destructive', onPress: onHandleReset }]);
         } else {
             setConfirmed(true);
             setSelectedNumber(chosenNumber);
@@ -34,12 +34,12 @@ export default function StarGame({ onStartGame }) {
         }
     }
 
-    
+
     const confirmedOutput = () => confirmed ? (
         <Card style={styles.confirmedContainer}>
             <Text style={styles.confirmedTitle}>Numero seleccionado</Text>
             <NumberContainer number={selectedNumber} />
-            <Button 
+            <Button
                 title="JUGAR"
                 onPress={() => onStartGame(selectedNumber)}
                 color={Colors.primary}
@@ -49,40 +49,42 @@ export default function StarGame({ onStartGame }) {
 
 
     return (
-        <TouchableWithoutFeedback onPress={ () => {
+        <TouchableWithoutFeedback onPress={() => {
             Keyboard.dismiss()
         }}>
-            <View style={styles.container}>
-                <Text style={styles.title}>¡Vamos a jugar!</Text>
-                <Card style={styles.inputContainer}>
-                    <Text style={styles.inputTitle}>Elija un numero</Text>
-                    <Input
-                        style={styles.input}
-                        placeholder='0'
-                        maxLength={2}
-                        keyboardType='number-pad'
-                        blurOnSubmit
-                        autoCapitalization='none'
-                        autoCorrect={false}
-                        onChangeText={onHandleChange}
-                        value={number}
-                    />
-                    <View style={styles.buttonContainer}>
-                        <Button
-                            title='Resetear'
-                            onPress={onHandleReset}
-                            color={Colors.primary}
+            <ScrollView style={styles.containerScroll}>
+                <View style={styles.container}>
+                    <Text style={styles.title}>¡Vamos a jugar!</Text>
+                    <Card style={styles.inputContainer}>
+                        <Text style={styles.inputTitle}>Elija un numero</Text>
+                        <Input
+                            style={styles.input}
+                            placeholder='0'
+                            maxLength={2}
+                            keyboardType='number-pad'
+                            blurOnSubmit
+                            autoCapitalization='none'
+                            autoCorrect={false}
+                            onChangeText={onHandleChange}
+                            value={number}
                         />
-                        <Button
-                            style={styles.button}
-                            title='Confirmar'
-                            onPress={onHandleConfirm}
-                            color={Colors.primary}
-                        />
-                    </View>
-                </Card>
-                {confirmedOutput()}
-            </View>
+                        <View style={styles.buttonContainer}>
+                            <Button
+                                title='Resetear'
+                                onPress={onHandleReset}
+                                color={Colors.primary}
+                            />
+                            <Button
+                                style={styles.button}
+                                title='Confirmar'
+                                onPress={onHandleConfirm}
+                                color={Colors.primary}
+                            />
+                        </View>
+                    </Card>
+                    {confirmedOutput()}
+                </View>
+            </ScrollView>
         </TouchableWithoutFeedback>
     )
 }
